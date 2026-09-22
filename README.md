@@ -26,7 +26,7 @@ FracAtlas is a musculoskeletal radiograph dataset containing images with fractur
 
 - Total X-ray images: **4,083**
 - Fractured images: **717**
-- Non-fractured images: **3,366**
+- Non-Fractured images: **3,366**
 - Fracture instances: **922** (paper-reported)
 - Anatomical regions: Hand, Shoulder, Leg and Hip
 
@@ -90,6 +90,21 @@ These include the generated validation and metric visualization files from the f
 ## Streamlit Application
 
 The project includes a Streamlit application for interactive inference.
+
+### Live Demo
+
+**[Open Live Streamlit App](https://bone-fracture-detection-yolov8-qbyc5xv499hrxr4o4csp6z.streamlit.app/)**
+
+### Features
+
+- Upload an X-ray image
+- Detect possible fracture regions
+- Display bounding-box localization
+- Show detection count
+- Replace the uploaded image
+- Run inference through a simple web interface
+
+### Application Structure
 
 ```text
 fracture_streamlit_app/
