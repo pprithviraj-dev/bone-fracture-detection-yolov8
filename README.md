@@ -112,6 +112,7 @@ fracture_streamlit_app/
 ├── best.pt
 └── requirements.txt
 
+```
 ## Medical Disclaimer
 
 This project is an AI/ML demonstration developed for educational and research purposes.
