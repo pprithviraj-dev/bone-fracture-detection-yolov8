@@ -350,7 +350,7 @@ with col2:
 
             results = model.predict(
                 image,
-                conf=0.10,
+                conf=0.01,
                 verbose=False
             )
 
