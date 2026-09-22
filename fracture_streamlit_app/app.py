@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
@@ -188,7 +189,10 @@ st.markdown("""
 # LOAD MODEL
 # =========================
 
-MODEL_PATH = "best.pt"
+MODEL_PATH = os.path.join(
+    os.path.dirname(__file__),
+    "best.pt"
+)
 
 
 @st.cache_resource
@@ -252,18 +256,12 @@ with col1:
             key=f"uploader_{st.session_state.uploader_key}"
         )
 
-        # New image selected
         if uploaded_file is not None:
 
-            # Save image bytes permanently in session
             st.session_state.image_bytes = uploaded_file.getvalue()
 
-            # Hide uploader
             st.session_state.show_uploader = False
 
-            # Immediately rerun
-            # so uploader disappears and image
-            # appears in its place.
             st.rerun()
 
     # =====================
@@ -272,12 +270,10 @@ with col1:
 
     else:
 
-        # Recreate image from saved bytes
         image = Image.open(
             BytesIO(st.session_state.image_bytes)
         ).convert("RGB")
 
-        # Convert image to Base64
         buffer = BytesIO()
 
         image.save(
@@ -289,7 +285,6 @@ with col1:
             buffer.getvalue()
         ).decode()
 
-        # Display image in input box
         st.markdown(
             f"""
             <div class="image-box">
@@ -301,22 +296,17 @@ with col1:
 
         st.write("")
 
-        # Change image button
         if st.button(
             "🔄 Change Image",
             use_container_width=True
         ):
 
-            # Clear current image
             st.session_state.image_bytes = None
 
-            # Show uploader again
             st.session_state.show_uploader = True
 
-            # New uploader key
             st.session_state.uploader_key += 1
 
-            # Reload
             st.rerun()
 
 
@@ -352,12 +342,10 @@ with col2:
 
     else:
 
-        # Load image
         image = Image.open(
             BytesIO(st.session_state.image_bytes)
         ).convert("RGB")
 
-        # Run detection
         with st.spinner("Analyzing X-ray..."):
 
             results = model.predict(
@@ -368,15 +356,12 @@ with col2:
 
         result = results[0]
 
-        # Create annotated image
         annotated_image = result.plot()
 
-        # Convert to PIL
         annotated_image = Image.fromarray(
             annotated_image
         )
 
-        # Convert output to Base64
         buffer = BytesIO()
 
         annotated_image.save(
@@ -388,7 +373,6 @@ with col2:
             buffer.getvalue()
         ).decode()
 
-        # Display output
         st.markdown(
             f"""
             <div class="image-box">
@@ -398,7 +382,6 @@ with col2:
             unsafe_allow_html=True
         )
 
-        # Count detections
         fracture_count = len(result.boxes)
 
         if fracture_count > 0:
@@ -423,7 +406,7 @@ st.divider()
 st.markdown(
     """
     <div class="disclaimer">
-    ⚠️ This AI demonstration is trained on a limited dataset and is intended
+    This AI demonstration is trained on a limited dataset and is intended
     for educational and research purposes only. It should not be used for
     medical diagnosis or clinical decision-making.
     </div>
