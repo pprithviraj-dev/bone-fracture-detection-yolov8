@@ -111,3 +111,27 @@ fracture_streamlit_app/
 ├── app.py
 ├── best.pt
 └── requirements.txt
+
+## Medical Disclaimer
+
+This project is an AI/ML demonstration developed for educational and research purposes.
+
+The model was trained on a limited dataset and should **not** be used for medical diagnosis, treatment decisions, or clinical decision-making.
+
+Results produced by the application should not be considered a substitute for assessment by a qualified medical professional.
+
+## Future Improvements
+
+Possible future improvements include:
+
+- Larger and more diverse training datasets
+- Improved fracture localization
+- Additional anatomical regions
+- Model optimization for deployment
+- More extensive external validation
+
+## Author
+
+**Prithvi Raj**
+
+This project was developed as a computer vision and machine learning portfolio project.
